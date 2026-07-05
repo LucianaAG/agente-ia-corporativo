@@ -1,0 +1,1 @@
+Este archivo tiene una extensión que el router no reconoce.
