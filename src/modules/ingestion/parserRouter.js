@@ -6,6 +6,7 @@ const csvParser = require('./parsers/csvParser');
 const htmlParser = require('./parsers/htmlParser');
 const pdfParser = require('./parsers/pdfParser');
 const docxParser = require('./parsers/docxParser');
+const xlsxParser = require('./parsers/xlsxParser');
 
 const parsers = {
   '.md': markdownParser,
@@ -15,6 +16,7 @@ const parsers = {
   '.htm': htmlParser,
   '.pdf': pdfParser,
   '.docx': docxParser,
+  '.xlsx': xlsxParser,
 };
 
 async function parseFile(buffer, fileName) {
