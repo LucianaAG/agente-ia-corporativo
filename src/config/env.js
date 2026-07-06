@@ -4,6 +4,7 @@ const { z } = require('zod');
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
+  HUGGINGFACE_API_KEY: z.string().min(1, 'HUGGINGFACE_API_KEY es requerida'),
 });
 
 const parsed = schema.safeParse(process.env);
