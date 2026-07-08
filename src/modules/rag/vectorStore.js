@@ -40,8 +40,12 @@ function cosineSimilarity(vecA, vecB) {
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
-function search(queryEmbedding, topK = 5) {
-  const scored = store.map((entry) => ({
+function search(queryEmbedding, topK = 5, domain = null) {
+  const candidates = domain
+    ? store.filter((entry) => entry.metadata.domain === domain)
+    : store;
+
+  const scored = candidates.map((entry) => ({
     text: entry.text,
     metadata: entry.metadata,
     score: cosineSimilarity(queryEmbedding, entry.embedding),
