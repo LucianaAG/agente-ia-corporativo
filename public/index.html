@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agente IA Corporativo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Agente IA Corporativo</h1>
+    <p class="subtitle">Consultá la base de conocimiento de la empresa</p>
+
+    <section class="chat-section">
+      <div id="chat-history" class="chat-history"></div>
+
+      <form id="chat-form" class="chat-form">
+        <select id="domain-select">
+          <option value="">Todos los dominios</option>
+          <option value="Recursos Humanos">Recursos Humanos</option>
+          <option value="Financiero y Contable">Financiero y Contable</option>
+          <option value="Operacional">Operacional</option>
+          <option value="Estratégico">Estratégico</option>
+          <option value="Legal y Compliance">Legal y Compliance</option>
+          <option value="Marketing y Comercial">Marketing y Comercial</option>
+          <option value="Datos y Sistemas">Datos y Sistemas</option>
+          <option value="Investigación y Desarrollo">Investigación y Desarrollo</option>
+          <option value="Calidad">Calidad</option>
+          <option value="Comunicación Interna">Comunicación Interna</option>
+        </select>
+        <input type="text" id="question-input" placeholder="Escribí tu pregunta..." required />
+        <button type="submit">Preguntar</button>
+      </form>
+    </section>
+
+    <section class="upload-section">
+      <h2>Subir documento</h2>
+      <form id="upload-form" class="upload-form">
+        <input type="file" id="file-input" required />
+        <select id="upload-domain-select">
+          <option value="">General</option>
+          <option value="Recursos Humanos">Recursos Humanos</option>
+          <option value="Financiero y Contable">Financiero y Contable</option>
+          <option value="Operacional">Operacional</option>
+          <option value="Estratégico">Estratégico</option>
+          <option value="Legal y Compliance">Legal y Compliance</option>
+          <option value="Marketing y Comercial">Marketing y Comercial</option>
+          <option value="Datos y Sistemas">Datos y Sistemas</option>
+          <option value="Investigación y Desarrollo">Investigación y Desarrollo</option>
+          <option value="Calidad">Calidad</option>
+          <option value="Comunicación Interna">Comunicación Interna</option>
+        </select>
+        <button type="submit">Subir</button>
+      </form>
+      <p id="upload-status"></p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

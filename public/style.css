@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  color: #222;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 0;
+}
+
+.chat-section {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chat-history {
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+.message {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 85%;
+  white-space: pre-wrap;
+}
+
+.message.user {
+  background-color: #dbeafe;
+  margin-left: auto;
+}
+
+.message.assistant {
+  background-color: #f1f1f1;
+}
+
+.message .sources {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 6px;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+}
+
+#question-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+select, button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+.upload-section {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#upload-status {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #444;
+}
