@@ -10,7 +10,8 @@ async function handleUpload(req, res, next) {
       return res.status(400).json({ error: 'No se recibió ningún archivo' });
     }
 
-    const { buffer, originalname } = req.file;
+    const { buffer } = req.file;
+    const originalname = Buffer.from(req.file.originalname, 'latin1').toString('utf8');
     const domain = normalizeDomain(req.body.domain);
 
     const parsed = await parseFile(buffer, originalname);
