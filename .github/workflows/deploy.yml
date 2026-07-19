@@ -58,5 +58,5 @@ jobs:
               "docker pull ${{ env.ECR_REPOSITORY }}:latest",
               "docker stop agente-ia || true",
               "docker rm agente-ia || true",
-              "docker run -d --name agente-ia -p 3000:3000 --env-file /opt/agente-ia/.env ${{ env.ECR_REPOSITORY }}:latest"
+              "docker run -d --name agente-ia -p 3000:3000 --env-file /opt/agente-ia-corporativo/.env ${{ env.ECR_REPOSITORY }}:latest"
             ]'
