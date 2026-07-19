@@ -1,0 +1,62 @@
+# nombre del workflow
+name: Deploy to AWS
+
+# cuando se dispara el workflow (cuando pusheamos a main)
+on:
+  push:
+    branches:
+      - main
+
+# permisos que necesita para poder operar:
+#token de OICD para pushear las imagenes y permiso de lectura para leer el codigo del proyecto
+
+permissions:
+  id-token: write
+  contents: read
+
+# variables globales que necesita: Region, repositorio donde almacenar las imagenes e instancia que descarga las imagenes
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: 610901823534.dkr.ecr.us-east-1.amazonaws.com/dev-agente-ia
+  INSTANCE_ID: i-0f25b74a31bb2e4cf
+
+# lee el codigo 
+# configura las credenciales de acceso al ECR via OIDC
+# luego hace login con las credenciales 
+# hace build y push de la imagen en ECR
+# y por ultimo, se autentica en ECR, la EC2 descarga la nueva imagen, detiene el contenedor viejo y arranca el nuevo
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::610901823534:role/github-actions-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.ECR_REPOSITORY }}:latest .
+          docker push ${{ env.ECR_REPOSITORY }}:latest
+
+      - name: Deploy to EC2 via SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids ${{ env.INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 610901823534.dkr.ecr.us-east-1.amazonaws.com",
+              "docker pull ${{ env.ECR_REPOSITORY }}:latest",
+              "docker stop agente-ia || true",
+              "docker rm agente-ia || true",
+              "docker run -d --name agente-ia -p 3000:3000 --env-file /opt/agente-ia/.env ${{ env.ECR_REPOSITORY }}:latest"
+            ]'
